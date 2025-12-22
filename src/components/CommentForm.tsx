@@ -2,7 +2,7 @@
 
 import { useActionState, useEffect, useRef } from "react";
 import { toast } from "sonner";
-import { createCommentAction, type CreateCommentState } from "@/lib/actions";
+import { createCommentAction, type CreateCommentState } from "@/lib/guestbook.actions";
 
 const initialState: CreateCommentState = { ok: false, message: "" };
 

@@ -1,6 +1,6 @@
 "use server";
 
-import { supabase } from "@/lib/supabase";
+import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { revalidatePath } from "next/cache";
 
 export type CreatePostState =
@@ -18,6 +18,7 @@ export async function createPostAction(
     return { ok: false, message: "標題和內容都要填喔" };
   }
 
+  const supabase = await createSupabaseServerClient();
   const { error } = await supabase.from("posts").insert({ title, content });
 
   if (error) {
@@ -50,7 +51,8 @@ export async function createCommentAction(
   if (parentId !== null && !Number.isFinite(parentId))
     return { ok: false, message: "parentId 不正確" };
   if (!content) return { ok: false, message: "留言內容不能空白" };
-
+  
+ const supabase = await createSupabaseServerClient();
   const { error } = await supabase.from("comments").insert({
     post_id: postId,
     parent_id: parentId,

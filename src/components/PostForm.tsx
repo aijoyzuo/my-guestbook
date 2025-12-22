@@ -2,7 +2,7 @@
 
 import { useActionState, useEffect, useRef } from "react";
 import { toast } from "sonner";
-import { createPostAction, type CreatePostState } from "@/lib/actions";
+import { createPostAction, type CreatePostState } from "@/lib/guestbook.actions";
 
 const initialState: CreatePostState = { ok: false, message: "" };
 
